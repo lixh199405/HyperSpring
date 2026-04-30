@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xhl</groupId>
+        <artifactId>HyperSpring</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>hyperspring-processor</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <!-- 1. 必须依赖注解模块，否则处理器找不到 @HyperComponent 的定义 -->
+        <dependency>
+            <groupId>com.xhl</groupId>
+            <artifactId>hyperspring-annotations</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 2. JavaPoet 用于生成代码 -->
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+            <version>1.13.0</version>
+        </dependency>
+
+        <!-- 3. AutoService：用于自动注册处理器 -->
+        <!-- 关键点：必须设置为 provided，只参与编译，不打包进 jar -->
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- 4. 删除 javax.annotation-api -->
+        <!-- 原因：JDK 17 自带了 javax.annotation，且 Processor 不需要运行时依赖它 -->
+<!--        <dependency>-->
+<!--            <groupId>com.xhl</groupId>-->
+<!--            <artifactId>hyperspring-annotations</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>javax.annotation</groupId>-->
+<!--            <artifactId>javax.annotation-api</artifactId>-->
+<!--            <version>1.3.2</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Google AutoService &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.auto.service</groupId>-->
+<!--            <artifactId>auto-service</artifactId>-->
+<!--            <version>1.1.1</version> &lt;!&ndash; 或者 1.0.1 &ndash;&gt;-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; 代码生成神器 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.squareup</groupId>-->
+<!--            <artifactId>javapoet</artifactId>-->
+<!--            <version>1.13.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; 自动注册 Processor，避免手动配置 META-INF &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.auto.service</groupId>-->
+<!--            <artifactId>auto-service</artifactId>-->
+<!--            <version>1.1.1</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+    </dependencies>
+</project>
